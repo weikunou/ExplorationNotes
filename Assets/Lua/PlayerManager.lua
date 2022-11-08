@@ -16,6 +16,10 @@ PlayerManager.CreatePlayer = function (self, id, name, level)
     return player
 end
 
+PlayerManager.GetPlayer = function (self, id)
+    return self._playerList[id]
+end
+
 PlayerManager.Update = function (self)
 
 end

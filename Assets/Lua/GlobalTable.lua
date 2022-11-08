@@ -1,3 +1,6 @@
 GameObject = require("UnityEngine.GameObject")
 PrimitiveType = require("UnityEngine.PrimitiveType")
 Input = require("UnityEngine.Input")
+Camera = require("UnityEngine.Camera")
+Rigidbody = require("UnityEngine.Rigidbody")
+CapsuleCollider = require("UnityEngine.CapsuleCollider")

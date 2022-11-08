@@ -28,6 +28,9 @@ Player.CreateModel = function (self)
     self.cube.transform.parent = self.player.transform
 
     self.player.transform.position = Vector3.New(0, 0.5, 0)
+
+    self.player:AddComponent(typeof(CapsuleCollider))
+    self.player:AddComponent(typeof(Rigidbody))
 end
 
 ---角色移动
