@@ -1,5 +1,3 @@
-require("Global_Function")
-
 ---角色类
 Player = Class("Player")
 
@@ -17,7 +15,7 @@ end
 ---@param self table 实例
 Player.CreateModel = function (self)
 	-- 创建一个方块，表示角色模型
-	self.cube = UnityEngine.GameObject.CreatePrimitive(UnityEngine.PrimitiveType.Cube)
+	self.cube = GameObject.CreatePrimitive(PrimitiveType.Cube)
 	self.cube.transform.position = Vector3.New(0, 0.5, 0)
 end
 
