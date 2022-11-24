@@ -9,12 +9,23 @@ Player.Ctor = function (self, name, level)
     self.name = name
     self.level = level
     self.speed = 5
+    self.jumpSpeed = 100
+    self.isGround = true
     self:CreateModel()
+    self:RegisterEvent()
+end
 
-    if not self.handle then
-        self.handle = UpdateBeat:CreateListener(self.Update, self)
+---注册事件
+---@param self table 实例
+Player.RegisterEvent = function (self)
+    if not self.handleUpdate then
+        self.handleUpdate = UpdateBeat:CreateListener(self.Update, self)
     end
-    UpdateBeat:AddListener(self.handle)
+    UpdateBeat:AddListener(self.handleUpdate)
+    if not self.handleFixedUpdate then
+        self.handleFixedUpdate = FixedUpdateBeat:CreateListener(self.FixedUpdate, self)
+    end
+    UpdateBeat:AddListener(self.handleFixedUpdate)
 end
 
 ---创建模型
@@ -30,7 +41,8 @@ Player.CreateModel = function (self)
     self.player.transform.position = Vector3.New(0, 0.5, 0)
 
     self.player:AddComponent(typeof(CapsuleCollider))
-    self.player:AddComponent(typeof(Rigidbody))
+    self.rigidbody = self.player:AddComponent(typeof(Rigidbody))
+    self.rigidbody.freezeRotation = true
 end
 
 ---角色移动
@@ -44,7 +56,28 @@ Player.Update = function (self)
     local h = Input.GetAxis("Horizontal")
     local v = Input.GetAxis("Vertical")
     if h ~= 0 or v ~= 0 then
-        local move = Vector3.New(h, 0, v) * self.speed * Time.deltaTime
-        self.player.transform:Translate(move)
+        local move = Vector3.New(h, 0, v) * self.speed
+        self.currentMove = move
+        self.isMove = true
+    else
+        self.isMove = false
+    end
+
+    self.isJump = Input.GetButton("Jump")
+
+    if self.rigidbody.velocity.y == 0 then
+        self.isGround = true
+    else
+        self.isGround = false
+    end
+end
+
+Player.FixedUpdate = function (self)
+    if self.isMove then
+        self.rigidbody.velocity = Vector3.New(self.currentMove.x, self.rigidbody.velocity.y, self.currentMove.z)
+    end
+
+    if self.isGround and self.isJump then
+        self.rigidbody:AddForce(self.player.transform.up * self.jumpSpeed)
     end
 end

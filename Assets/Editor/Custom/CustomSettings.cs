@@ -150,7 +150,10 @@ public static class CustomSettings
         _GT(typeof(RenderTexture)),
         _GT(typeof(Resources)),     
         _GT(typeof(LuaProfiler)),
+
+        // 自定义添加
         _GT(typeof(PrimitiveType)),
+        _GT(typeof(RigidbodyConstraints))
     };
 
     public static List<Type> dynamicList = new List<Type>()
