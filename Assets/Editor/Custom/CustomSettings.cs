@@ -76,7 +76,7 @@ public static class CustomSettings
         _GT(typeof(Material)).AddExtendType(typeof(DG.Tweening.ShortcutExtensions)),
         _GT(typeof(Rigidbody)).AddExtendType(typeof(DG.Tweening.ShortcutExtensions)),
         _GT(typeof(Camera)).AddExtendType(typeof(DG.Tweening.ShortcutExtensions)),
-        _GT(typeof(AudioSource)).AddExtendType(typeof(DG.Tweening.ShortcutExtensions)),
+        // _GT(typeof(AudioSource)).AddExtendType(typeof(DG.Tweening.ShortcutExtensions)),
         //_GT(typeof(LineRenderer)).AddExtendType(typeof(DG.Tweening.ShortcutExtensions)),
         //_GT(typeof(TrailRenderer)).AddExtendType(typeof(DG.Tweening.ShortcutExtensions)),    
 #else
@@ -87,7 +87,7 @@ public static class CustomSettings
         _GT(typeof(Light)),
         _GT(typeof(Rigidbody)),
         _GT(typeof(Camera)),
-        _GT(typeof(AudioSource)),
+        // _GT(typeof(AudioSource)),
         //_GT(typeof(LineRenderer))
         //_GT(typeof(TrailRenderer))
 #endif
@@ -123,7 +123,7 @@ public static class CustomSettings
         _GT(typeof(Space)),      
        
 
-        _GT(typeof(MeshRenderer)),
+        // _GT(typeof(MeshRenderer)),
 #if !UNITY_5_4_OR_NEWER
         _GT(typeof(ParticleEmitter)),
         _GT(typeof(ParticleRenderer)),
@@ -153,12 +153,15 @@ public static class CustomSettings
 
         // 自定义添加
         _GT(typeof(PrimitiveType)),
-        _GT(typeof(RigidbodyConstraints))
+        _GT(typeof(RigidbodyConstraints)),
+
+        _GT(typeof(ResManager)),
+        _GT(typeof(UIManager)),
     };
 
     public static List<Type> dynamicList = new List<Type>()
     {
-        typeof(MeshRenderer),
+        // typeof(MeshRenderer),
 #if !UNITY_5_4_OR_NEWER
         typeof(ParticleEmitter),
         typeof(ParticleRenderer),

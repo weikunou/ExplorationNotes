@@ -5,6 +5,7 @@ require("GlobalFunction")
 -- 加载管理器
 require("GameManager")
 require("PlayerManager")
+require("UITool")
 
 require("CameraFollow")
 
@@ -12,7 +13,6 @@ Game = Class("Game")
 
 Game.Ctor = function (self)
     self:Awake()
-    self:Start()
 end
 
 Game.Awake = function (self)
@@ -25,6 +25,7 @@ Game.Awake = function (self)
 end
 
 Game.Start = function (self)
+    self:GetManager("UITool"):CreatePanel("PnlMain")
     local player = self:GetManager("PlayerManager"):CreatePlayer(10001, "kun", 1)
     CameraFollow.New(player)
 end
@@ -41,6 +42,7 @@ Game.InitManager = function (self)
     self.managerList = {}
     self.managerList["GameManager"] = GameManager.New()
     self.managerList["PlayerManager"] = PlayerManager.New()
+    self.managerList["UITool"] = UITool.New()
 end
 
 Game.GetManager = function (self, name)

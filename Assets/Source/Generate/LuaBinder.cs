@@ -11,6 +11,10 @@ public static class LuaBinder
 		L.BeginModule(null);
 		LuaInterface_DebuggerWrap.Register(L);
 		LuaProfilerWrap.Register(L);
+		ResManagerWrap.Register(L);
+		UIManagerWrap.Register(L);
+		Singleton_ResManagerWrap.Register(L);
+		Singleton_UIManagerWrap.Register(L);
 		L.BeginModule("LuaInterface");
 		LuaInterface_LuaInjectionStationWrap.Register(L);
 		LuaInterface_InjectTypeWrap.Register(L);
@@ -21,7 +25,6 @@ public static class LuaBinder
 		UnityEngine_MaterialWrap.Register(L);
 		UnityEngine_LightWrap.Register(L);
 		UnityEngine_CameraWrap.Register(L);
-		UnityEngine_AudioSourceWrap.Register(L);
 		UnityEngine_BehaviourWrap.Register(L);
 		UnityEngine_MonoBehaviourWrap.Register(L);
 		UnityEngine_GameObjectWrap.Register(L);
@@ -57,7 +60,6 @@ public static class LuaBinder
 		UnityEngine_ResourcesWrap.Register(L);
 		UnityEngine_PrimitiveTypeWrap.Register(L);
 		UnityEngine_RigidbodyConstraintsWrap.Register(L);
-		UnityEngine_AudioBehaviourWrap.Register(L);
 		L.BeginModule("Events");
 		L.RegFunction("UnityAction", UnityEngine_Events_UnityAction);
 		L.EndModule();
@@ -88,7 +90,6 @@ public static class LuaBinder
 		L.EndModule();
 		L.EndModule();
 		L.BeginPreLoad();
-		L.AddPreLoad("UnityEngine.MeshRenderer", LuaOpen_UnityEngine_MeshRenderer, typeof(UnityEngine.MeshRenderer));
 		L.AddPreLoad("UnityEngine.BoxCollider", LuaOpen_UnityEngine_BoxCollider, typeof(UnityEngine.BoxCollider));
 		L.AddPreLoad("UnityEngine.MeshCollider", LuaOpen_UnityEngine_MeshCollider, typeof(UnityEngine.MeshCollider));
 		L.AddPreLoad("UnityEngine.SphereCollider", LuaOpen_UnityEngine_SphereCollider, typeof(UnityEngine.SphereCollider));
@@ -555,24 +556,6 @@ public static class LuaBinder
 				Delegate arg1 = DelegateTraits<System.Action<UnityEngine.AsyncOperation>>.Create(func, self);
 				ToLua.Push(L, arg1);
 			}
-			return 1;
-		}
-		catch(Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LuaOpen_UnityEngine_MeshRenderer(IntPtr L)
-	{
-		try
-		{
-			LuaState state = LuaState.Get(L);
-			state.BeginPreModule("UnityEngine");
-			UnityEngine_MeshRendererWrap.Register(state);
-			int reference = state.GetMetaReference(typeof(UnityEngine.MeshRenderer));
-			state.EndPreModule(L, reference);
 			return 1;
 		}
 		catch(Exception e)
